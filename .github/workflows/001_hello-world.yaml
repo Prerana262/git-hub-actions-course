@@ -1,0 +1,10 @@
+# This is a sample workflow file
+name: Hello World Workflow
+
+on: [push]
+
+jobs:
+  hello_world:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, world!"
