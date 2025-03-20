@@ -1,10 +1,12 @@
-# This is a sample workflow file
-name: Hello World Workflow
+name: "01 Hello World"
 
-on: [push]
+on:
+  workflow_dispatch:  # This event triggers the workflow manually
 
 jobs:
-  hello_world:
-    runs-on: ubuntu-latest
+  say_hello_job:
+    runs-on: ubuntu-latest  # The runner environment (Ubuntu in this case)
+
     steps:
-      - run: echo "Hello, world!"
+      - name: Echo Hello World
+        run: echo "Hello, World!"
