@@ -1,0 +1,16 @@
+name: "Hi All on PR"
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  say_hi:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Hi All
+        run: echo "Hi all"
