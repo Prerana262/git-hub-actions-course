@@ -15,4 +15,4 @@ jobs:
 
       - name: Receive data
         run: |
-          echo ${{steps.sender.output.name}}
+          echo ${{steps.sender.outputs.name}}
