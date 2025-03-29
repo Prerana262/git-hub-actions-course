@@ -17,27 +17,34 @@ jobs:
 
       - name: Install tox
         run: pip install tox
+
       - name: Run unit tests
         run: |
           cd backend
           tox -e unit
-          ls -la ${{ github.workspace }}/backend
+          ls -la .coverage  # List the coverage folder to verify its creation
+
+      - name: List All Files (Debug Step)
+        run: find . -type f # This will show all files generated, helpful for debugging
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage
-          path: ${{ github.workspace }}/backend/.coverage
+          path: backend/.coverage # Make sure .coverage exists here
 
   load-file-example:
     runs-on: ubuntu-22.04
     needs: [unit-tests]
     steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: coverage
-          path: ${{ github.workspace }}
+          path: backend/.coverage # Match the path used during upload
 
       - name: List folder
-        run: ls -la ${{ github.workspace }}
+        run: ls -la backend/.coverage # Ensure the folder is properly downloaded
