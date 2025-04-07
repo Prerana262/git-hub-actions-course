@@ -6,32 +6,29 @@ on:
 jobs:
   example_job:
     runs-on: ubuntu-latest
-
     steps:
       - name: Step 1 - Exit Code 0
-        id: successful_step
+        id: sucessfull_step
         run: |
           echo "exit code 0"
           exit 0  # Success (exit code 0)
         shell: bash # If you want you can change the shell per step
 
-      - name: Step 2 - Execute If Previous Succeeded
-        # The syntax bellow ${{}} is expression syntax in github actions (we will cover this later).
-        # Success and failure are status expressions.
-        if: ${{ success() }} # Only run this step if the previous step succeeded
+      - name: Step 2 - Execute if previous step succeeded
+        if: ${{success()}} # Only run this step if the previous step succeeded
         run: |
-          echo "Running because the previous step has succeeded"
+          echo "running because the previous step has succeeded"
 
       - name: Step 3 - I am Failing
         run: |
-          echo "I am failing"
-          exit 1  # Failure (non-zero exit code)
+          echo "i am failing"
+          exit 1 # Failure (non-zero exit code)
 
-      - name: Step 4 - I Will Never Execute
+      - name: Step 4 - i will never execute
         run: |
-          echo "I will never execute"
+          echo "i will never execute"
 
       - name: Step 5 - Execute on Workflow Failure
-        if: ${{ failure() }} # Only run this step if the workflow failed
+        if: ${{failure()}} # Only run this step if the workflow failed(to clean up the environment )
         run: |
-          echo "Workflow failed"
+          echo "Workflow Failed"
