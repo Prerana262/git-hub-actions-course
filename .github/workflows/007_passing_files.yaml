@@ -22,16 +22,16 @@ jobs:
         run: |
           cd backend
           tox -e unit
-          ls -la .coverage  # Check if coverage file is created
+          ls -la .coverage  # List the coverage folder to verify its creation
 
       - name: List All Files (Debug Step)
-        run: find . -type f # Debug to see where .coverage exists
+        run: find . -type f # This will show all files generated, helpful for debugging
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: coverage
-          path: backend/.coverage  # ✅ Corrected path
+          path: .coverage # Make sure .coverage exists here
 
   load-file-example:
     runs-on: ubuntu-22.04
@@ -42,10 +42,6 @@ jobs:
 
       - name: Download artifact
         uses: actions/download-artifact@v4
-        with:
-          name: coverage
-
-      - name: List downloaded files
-        run: |
-          echo "Files after download:"
-          find . -type f
+      
+      - name: List folder 
+        run: ls -la ${{ github.workspace }}  
